@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Asap:ital,wght@0,100..900;1,100..900&family=MuseoModerno:ital,wght@0,100..900;1,100..900&display=swap');
+
+body {
+    font-family: "Asap", sans-serif;
+    background-color: #EDF7FF;
+    font-size: 25pt;
+    color: #04146C;
+}
+
+h1 {
+    font-size: 88pt;
+}
+
+h2 {
+    font-size: 39pt;
+}
+
+li {
+    font-weight: bold
+
+}
+
+.museum, h2 {
+    font-family: "MuseoModerno", sans-serif;
+    color: #0A2FF1;
+}
+
+.hashmuseum {
+    font-family: "MuseoModerno", sans-serif;
+    color: #8A9AF1;
+    font-size: 129pt;
+}
