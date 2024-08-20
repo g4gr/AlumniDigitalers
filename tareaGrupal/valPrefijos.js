@@ -2,35 +2,17 @@ function validarPrefijo(parametro) {
     let prefijos = [54, 55, 56, 57, 58]
     let paises = ["argentina", "brasil", "chile", "colombia", "venezuela"]
     
-    if(typeof parametro !== "number"){
+    if(typeof parametro !== "string"){
 
-        let objetoPref = {}
+        let objeto = {}
 
         for (let i = 0; i < prefijos.length; i++) {
-            objetoPref[prefijos[i]] = paises[i];
+            objeto[prefijos[i]] = paises[i];
         }
 
-        console.log(objetoPref);
+        let numPasado = parametro.toString();
+        let prefijo = numPasado.slice(0,2);
 
-        let numPasado = parametro.toString().toLowerCase()
-        let prefijo = numPasado.slice(0,2)
-
-        let objetoNum = {}
-        
-        for (let i = 0; i < paises.length; i++) {
-            objetoNum[paises[i]] = prefijos[i];
-        }
-
-        console.log(objetoNum);
-
-
-        for(let j = 0; j < objeto.length - 1; j++) {
-            if(prefijo == objeto[54 + j]) {
-                console.log(`Este número  pertenece a ${objeto[j+54]}`)
-            }
-        }
-
-/*
         switch (prefijo) {
             case '54':
                 console.log(`Este número pertenece a ${objeto[54]}`)
@@ -52,12 +34,14 @@ function validarPrefijo(parametro) {
                 console.log('El número no pertenece a nuestros países')
                 break;
         }
-                */
-    } else if (typeof parametro !== "string") {
+    } else if (typeof parametro !== 'number') {
+        let objeto = {}
+        
         for (let i = 0; i < paises.length; i++) {
             objeto[paises[i]] = prefijos[i];
         }
 
+        let num = parametro.toString()
         let pais = num.toLowerCase()
 
         switch (pais) {
