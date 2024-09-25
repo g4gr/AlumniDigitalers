@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>App - Lista de Compras</title>
+
+  <link href="./styles.css" rel="stylesheet">
+
+  <style>
+    @font-face {
+      font-family: 'Montserrat';
+      src: url('./fonts/static/Montserrat-Regular.ttf');
+    }
+  </style>
+
+</head>
+
+<body class="Body">
+  <!-- Comienzo Header -->
+  <header class="Header">
+    <nav class="Navbar">
+      <figure class="logo" height="64px" width="64px">
+        <img class="logo__img" height="48px" width="48px" src="./assets/Logo.svg" alt="Logo">
+        <figcaption>Mis tareas</figcaption>
+      </figure>
+      <menu class="Menu">
+        <li class="Menu__item">
+          <a href="" class="Menu__item--link" target="_blank">
+            <figure height="64px" width="64px">
+              <img height="48px" width="48px" src="./assets/i_linkedin.svg"
+                alt="Logo Linkedin - Ir a mi perfil de Linkedin">
+            </figure>
+          </a>
+        </li>
+        <li class="Menu__item">
+          <a href="#" class="Menu__item--link" target="_blank">
+            <figure height="64px" width="64px">
+              <img height="48px" width="48px" src="./assets/i_github.svg" alt="Logo Github - Ir a mi repositorio">
+            </figure>
+          </a>
+        </li>
+        <li class="Menu__item">
+          <a href="" class="Menu__item--link">
+            <figure height="48px" width="48px">
+              <img height="32px" width="32px" src="./assets/i_menu.svg" alt="Menu">
+            </figure>
+            Men&uacute;
+          </a>
+        </li>
+      </menu>
+    </nav>
+  </header>
+  <!-- Fin Header -->
+  <!-- Inicio Aside -->
+  <aside class="Aside">
+    <section class="section">
+      <article class="article">
+        <header class="header">
+          <form class="task-form">
+            <fieldset>
+              <label for="task"></label>
+              <input type="text" id="js-Task" name="task" placeholder="Escribe tu tarea aquí">
+            </fieldset>
+            <fieldset>
+              <label for="date"></label>
+              <input type="date" id="js-Date" name="date" placeholder="date">
+            </fieldset>
+          </form>
+        </header>
+        <footer>
+          <div class="actions">
+            <button class="add-task" id='js-AddTask' onclick="addTask()">Agregar</button>
+            <!-- INFO: Agregar los botones por separado, en cada tarea. -->
+            <button class="edit-task" id='js-EditTask' onclick="editTask()">Editar</button>
+            <button class="delete-task" id='js-DeleteTask' onclick="deleteTask()">Eliminar</button>
+
+          </div>
+        </footer>
+      </article>
+    </section>
+  </aside>
+  <!-- Fin Aside -->
+  <!-- Comienzo Main -->
+  <main class="Main">
+    <section class="section">
+      <article class="article">
+        <ul id="task-list" class="TaskList">
+          <!-- Aquí se mostrarán las tareas -->
+        </ul>
+      </article>
+    </section>
+  </main>
+  <!-- Fin Main -->
+  <!-- Comienzo Footer -->
+  <footer class="Footer">
+    <section class="section">
+      <article class="article">
+      </article>
+    </section>
+  </footer>
+  <!-- Fin Footer -->
+
+  <script src="./App.js" defer></script>
+
+</body>
+
+</html>
