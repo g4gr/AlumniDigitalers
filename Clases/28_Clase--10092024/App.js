@@ -101,12 +101,25 @@ class TaskManager {
     }
 
     render() {
-        this.container.innerHTML = '';
+        // this.container.innerHTML = '';
         const ultimaTask = this.lastTask();
-        console.log(typeof ultimaTask);
 
-        this.tasks.push(ultimaTask);
-        console.table(this.tasks);
+        
+        if ( ultimaTask != undefined ){
+
+            const taskElement = document.createElement('li');
+            taskElement.textContent = `${ultimaTask.text} - Fecha: ${ultimaTask.date}`;
+            taskElement.classList.add('TaskList__item');
+            this.container.appendChild(taskElement);
+
+            const inputElement = document.createElement('input');
+            inputElement.type = 'radio';
+            inputElement.setAttribute('name', 'taskItem');
+            taskElement.appendChild(inputElement);
+        
+            this.tasks.push(taskElement);
+        }
+        //console.table(this.tasks);
 
         /*
         ultimaTask{
@@ -117,18 +130,8 @@ class TaskManager {
         }
         */
 
-        /* this.tasks.forEach(task => {
-            const taskElement = document.createElement('li');
-            taskElement.textContent = `${task.text} - Fecha: ${task.date}`;
-            taskElement.classList.add('TaskList__item');
-            this.container.appendChild(taskElement);
 
-            const inputElement = document.createElement('input');
-            inputElement.type = 'radio';
-            inputElement.setAttribute('name', 'taskItem');
-            taskElement.appendChild(inputElement);
-        });
- */
+
         this.addTask.addEventListener('click', () => {
             this.taskContent();
         });
