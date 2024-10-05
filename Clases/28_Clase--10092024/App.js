@@ -26,25 +26,19 @@
 
 class Task {
     constructor(id, text, date, status) {
-        this.id = id; // id : yhgfdu76ru7e , 
-        this.text = text; // text : "Comprar leche"     
-        this.date = date; // date : "2024-09-10"
-        this.completed = false;
+        this.id = id;
+        this.text = text;
+        this.date = date;
+        this.status = status;
     }
 
     toggleCompleted() {
         this.status = !this.status;
     }
 
-    render() { }
-
     update(text, date) {
         this.text = text;
         this.date = date;
-    }
-
-    delete(id, status) {
-        this.id = id;
     }
 }
 
@@ -53,67 +47,77 @@ class TaskManager {
         this.tasks = [];
 
         this.container = document.getElementById('task-list');
-        this.taskImput = document.getElementById('js-Task');
-        this.dateImput = document.getElementById('js-Date');
+        this.taskInput = document.getElementById('js-Task');
+        this.dateInput = document.getElementById('js-Date');
         this.addTask = document.getElementById('js-AddTask');
         this.editTask = document.getElementById('js-EditTask');
         this.deleteTask = document.getElementById('js-DeleteTask');
     }
 
-    // Creacion del ID de la tarea
     createIdTask() {
         return Math.random().toString(36).substring(2, 15);
+    
     }
 
-    // Asignacion del contenido de la tarea
-    taskContent() {
+    createTask(text, date) {
+        return new Task(this.createIdTask(), text, date, false);
+    }
 
-        if (this.taskImput.value == '' || this.dateImput.value == '') {
-            alert('La informacion esta incompleta. Por favor, ingresa la tarea o la fecha');
-            return
+    lastTask() {
+        return this.tasks[this.tasks.length - 1];
+    }
+
+    taskContent() {
+        if (this.taskInput.value === '' || this.dateInput.value === '') {
+            alert('La información está incompleta. Por favor, ingresa la tarea o la fecha');
+            return;
         }
 
-        const task = new Task(this.createIdTask(), this.taskImput.value, this.dateImput.value);
-
+        const task = new Task(this.createIdTask(), this.taskInput.value, this.dateInput.value, false);
         this.tasks.push(task);
-        this.render();
-        this.taskImput.value = '';
-        this.dateImput.value = '';
 
+        this.render();
+        this.taskInput.value = '';
+        this.dateInput.value = '';
     }
 
     deleteTask(id) {
         this.tasks = this.tasks.filter(task => task.id !== id);
         this.render();
-
     }
 
     editTask(id) {
         const task = this.tasks.find(task => task.id === id);
-        this.taskImput.value = task.text;
-        this.dateImput.value = task.date;
-        this.render();
-
         if (task) {
             let editText = prompt('Ingresa la tarea modificada');
             let editDate = prompt('Ingresa la fecha modificada');
-
             if (editText && editDate) {
                 task.update(editText, editDate);
                 this.render();
-            } else if (taskValue == '' || taskDate == '') {
-                this.addTask = false;
-                this.taskImput.value = task.text;
-                this.dateImput.value = task.date;
             }
         } else {
-            alert('No se encontro la tarea')
+            alert('No se encontró la tarea');
         }
     }
 
     render() {
-        // this.container.innerHTML = '';
-        this.tasks.forEach(task => {
+        this.container.innerHTML = '';
+        const ultimaTask = this.lastTask();
+        console.log(typeof ultimaTask);
+
+        this.tasks.push(ultimaTask);
+        console.table(this.tasks);
+
+        /*
+        ultimaTask{
+            "id": "bdceemkt1ys",
+            "text": "Primera tarea",
+            "date": "2024-10-04",
+            "status": false
+        }
+        */
+
+        /* this.tasks.forEach(task => {
             const taskElement = document.createElement('li');
             taskElement.textContent = `${task.text} - Fecha: ${task.date}`;
             taskElement.classList.add('TaskList__item');
@@ -124,34 +128,36 @@ class TaskManager {
             inputElement.setAttribute('name', 'taskItem');
             taskElement.appendChild(inputElement);
         });
-
+ */
         this.addTask.addEventListener('click', () => {
             this.taskContent();
         });
 
         this.editTask.addEventListener('click', () => {
-            this.editTask();
+            const selectedTask = this.tasks.find(task => task.status);
+            if (selectedTask) {
+                this.editTask(selectedTask.id);
+            } else {
+                alert('Primero selecciona una tarea');
+            }
         });
 
         this.deleteTask.addEventListener('click', () => {
-            this.deleteTask();
+            const selectedTask = this.tasks.find(task => task.status);
+            if (selectedTask) {
+                this.deleteTask(selectedTask.id);
+            } else {
+                alert('Primero selecciona una tarea');
+            }
         });
-        
-        
-        //TaskManager.editTask() ;
-        //TaskManager.deleteTask();
     }
-
 }
-
 
 document.addEventListener('DOMContentLoaded', () => {
     console.log('DOM cargado');
     const taskManager = new TaskManager();
     taskManager.render();
 });
-
-
 
 
 
